@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, defineAsyncComponent, ref } from 'vue'
 
 const lineClasses = [
   'top-row',
@@ -246,18 +246,24 @@ const miniMax = (gameCurrent: GameState, player: PlayerId, depth: number) => {
 
   return movePossibles[bestMove]
 }
+const Circle = defineAsyncComponent(() => import(`@/components/icons/AnimatedCircle.vue`))
+const Cross = defineAsyncComponent(() => import(`@/components/icons/AnimatedCross.vue`))
 </script>
 
 <template>
   <section :class="['grid', hasWinner && 'line line-' + lineClass]">
     <div class="grid-tile" v-for="tile in tiles" :key="tile">
       <button
-        class="grid-tile-button"
+        :class="[
+          'grid-tile-button',
+          'grid-tile-button--player' + currentState[tile] === 'o' ? 1 : 2
+        ]"
         v-on:click="onClickTile"
         :data-index="tile"
         :disabled="hasWinner"
       >
-        {{ currentState[tile] }}
+        <Circle v-if="currentState[tile] === 'o'" class="player-symbol player-symbol--player1" />
+        <Cross v-if="currentState[tile] === 'x'" class="player-symbol player-symbol--player2" />
       </button>
     </div>
   </section>
@@ -290,6 +296,9 @@ const miniMax = (gameCurrent: GameState, player: PlayerId, depth: number) => {
   margin-block: 2rem;
   position: relative;
   overflow: hidden;
+  background-image: url('/src/assets/animated-board.svg');
+  background-size: 110%;
+  background-position: 46% 56%;
 }
 
 .grid-tile {
@@ -297,16 +306,24 @@ const miniMax = (gameCurrent: GameState, player: PlayerId, depth: number) => {
   justify-content: center;
   align-items: center;
   aspect-ratio: 1/1;
-  background-color: #f0f0f0;
+}
+
+.player-symbol {
+  width: 80%;
+  height: auto;
 }
 
 .grid-tile-button {
   width: 100%;
   height: 100%;
   font-size: 2rem;
-  background-color: #fff;
   border: 0;
   cursor: pointer;
+  background: none;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
 }
 
 .line::after {
