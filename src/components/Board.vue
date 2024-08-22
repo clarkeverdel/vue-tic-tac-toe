@@ -26,6 +26,8 @@ const winnerOutcomes: {
   { outcomes: [3, 5, 7], class: lineClasses[7] }
 ]
 
+// positions are based on indexes
+
 type PlayerId = 'x' | 'o'
 type GameState = (null | PlayerId)[]
 
@@ -56,7 +58,7 @@ const resetGame = () => {
 const checkWinningPositions = (gameCurrent: GameState, player: PlayerId) => {
   let positions = findPositions(gameCurrent, player)
   for (let i = 0; i < winnerOutcomes.length; i++) {
-    if (winnerOutcomes[i].outcomes.every((item) => positions.includes(item))) {
+    if (winnerOutcomes[i].outcomes.every((item) => positions.includes(item - 1))) {
       return true
     }
   }
@@ -128,10 +130,6 @@ const checkGameStatus = () => {
     // You won!
     return
   }
-
-  if (!isWinner || !isDraw) {
-    switchTurn()
-  }
 }
 
 const switchTurn = () => {
@@ -152,6 +150,8 @@ const computerTurn = async () => {
     }
 
     switchTurn()
+
+    checkGameStatus()
   }, 1000)
 }
 
@@ -174,6 +174,8 @@ const onClickTile = async (event: Event) => {
   currentState.value = updateGame(index)
 
   checkGameStatus()
+
+  switchTurn()
 }
 
 const miniMax = (gameCurrent: GameState, player: PlayerId, depth: number) => {
