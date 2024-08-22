@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import Intro from '@/components/Intro.vue'
+import Board from '@/components/Board.vue'
 </script>
 
 <template>
   <main>
-    <h1>Tic Tac Toe</h1>
     <Intro />
     <Board />
   </main>
@@ -13,6 +13,7 @@ import Intro from '@/components/Intro.vue'
 <style scoped>
 main {
   display: flex;
+  flex-direction: column;
   width: 100%;
   max-width: 800px;
   margin-inline: auto;

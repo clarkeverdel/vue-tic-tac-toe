@@ -1,6 +1,11 @@
-<script setup lang="ts"></script>
-
 <template>
-  <h1>Tic Tac Toe</h1>
-  <p>Let's play Tic Tac Toe with your friends</p>
+  <section class="intro">
+    <p>This is a simple TicTacToe game that plays agains a computer.</p>
+  </section>
 </template>
+
+<style scoped>
+.intro {
+  text-align: center;
+}
+</style>

@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterView } from 'vue-router'
 </script>
 
 <template>
   <header>
-    <img src="" alt="Tic Tac Toe Logo" class="logo" />
+    <img src="@/assets/logo.svg" alt="Tic Tac Toe Logo" class="logo" />
   </header>
 
   <RouterView />
@@ -19,6 +19,7 @@ header {
 
 .logo {
   display: block;
-  margin: 0 2rem;
+  margin: 0 auto;
+  width: 200px;
 }
 </style>
