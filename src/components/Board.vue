@@ -26,8 +26,6 @@ const winnerOutcomes: {
   { outcomes: [3, 5, 7], class: lineClasses[7] }
 ]
 
-// positions are based on indexes
-
 type PlayerId = 'x' | 'o'
 type GameState = (null | PlayerId)[]
 
@@ -58,7 +56,14 @@ const resetGame = () => {
 const checkWinningPositions = (gameCurrent: GameState, player: PlayerId) => {
   let positions = findPositions(gameCurrent, player)
   for (let i = 0; i < winnerOutcomes.length; i++) {
-    if (winnerOutcomes[i].outcomes.every((item) => positions.includes(item - 1))) {
+    if (
+      winnerOutcomes[i].outcomes.every(
+        (item) =>
+          positions.includes(
+            item - 1
+          ) /** Item position minus one is the actual index we are looking for */
+      )
+    ) {
       return true
     }
   }

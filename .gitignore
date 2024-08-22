@@ -8,12 +8,23 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
+.yarn
 .DS_Store
 dist
 dist-ssr
 coverage
 *.local
 
+# Yarn
+.yarn/*
+!.yarn/cache
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+# Cypress
 /cypress/videos/
 /cypress/screenshots/
 
