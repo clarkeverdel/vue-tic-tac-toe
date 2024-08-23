@@ -251,7 +251,7 @@ const Cross = defineAsyncComponent(() => import(`@/components/icons/AnimatedCros
 </script>
 
 <template>
-  <section :class="['grid', hasWinner && 'line line-' + lineClass]">
+  <section :class="['grid', hasWinner && 'line line-' + lineClass]" data-cy="grid">
     <div class="grid-tile" v-for="tile in tiles" :key="tile">
       <button
         :class="[
@@ -261,6 +261,7 @@ const Cross = defineAsyncComponent(() => import(`@/components/icons/AnimatedCros
         v-on:click="onClickTile"
         :data-index="tile"
         :disabled="hasWinner"
+        data-cy="grid-tile-button"
       >
         <Circle v-if="currentState[tile] === 'o'" class="player-symbol player-symbol--player1" />
         <Cross v-if="currentState[tile] === 'x'" class="player-symbol player-symbol--player2" />
